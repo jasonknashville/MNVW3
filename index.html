@@ -2,222 +2,257 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Move Now vs Wait</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Buy vs Wait 1 Year</title>
 
 <style>
 :root{
-  --bg:#f6f8fb;
+  --blue:#1e3a8a;
+  --red:#dc2626;
+  --light:#f5f7fb;
   --card:#ffffff;
+  --border:#d8e0ea;
   --text:#0f172a;
   --muted:#475569;
-  --border:#d8e0ea;
-  --shadow:0 12px 32px rgba(15,23,42,.08);
-  --radius:18px;
-  --buy:#2563eb;
-  --wait:#dc2626;
-  --barBlue:#1e3a8a;
-  --barRed:#dc2626;
 }
-body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:var(--bg);color:var(--text);}
-.brand-top{height:14px;background:var(--barRed);}
-.brand-header{display:flex;justify-content:center;padding:18px;background:#fff;border-bottom:1px solid rgba(0,0,0,.06);}
-.brand-header img{max-height:70px;}
-.wrap{max-width:1000px;margin:0 auto;padding:20px;}
-.brand-bottom{height:16px;background:var(--barBlue);}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:var(--light);color:var(--text);}
+.topbar{height:14px;background:var(--red);}
+.bottombar{height:16px;background:var(--blue);margin-top:30px;}
+.logo{text-align:center;padding:18px;background:white;}
+.logo img{max-height:70px;}
 
-.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;}
+.container{max-width:1000px;margin:0 auto;padding:20px;}
+.card{background:white;border:1px solid var(--border);border-radius:18px;padding:20px;}
 
-.head{padding:18px;background:linear-gradient(90deg,rgba(37,99,235,.08),rgba(220,38,38,.08));border-bottom:1px solid var(--border);}
-h1{margin:0;font-size:20px;}
-.subtitle{font-size:13px;color:var(--muted);margin-top:6px;}
+h1{margin:0 0 8px 0;font-size:22px;}
+.subtitle{font-size:14px;color:var(--muted);margin-bottom:20px;}
 
-.inputs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:16px;}
-.field{display:flex;flex-direction:column;}
-label{font-size:12px;color:var(--muted);}
-input{padding:8px;border-radius:12px;border:1px solid var(--border);}
-
-.toggle{padding:0 16px 16px;font-size:13px;color:var(--muted);}
-.toggle input{margin-right:6px;}
-
-.grid{display:grid;grid-template-columns:1fr 1px 1fr;}
+.grid{display:grid;grid-template-columns:1fr 1px 1fr;gap:20px;}
 .divider{background:#e2e8f0;}
 
-.side{padding:16px;}
-.badge{font-weight:800;font-size:12px;margin-bottom:10px;}
-.buy{color:var(--buy);}
-.wait{color:var(--wait);}
+.section-title{font-weight:800;margin-bottom:12px;}
+
+.field{display:flex;flex-direction:column;margin-bottom:10px;}
+label{font-size:12px;color:var(--muted);}
+input{padding:8px;border-radius:10px;border:1px solid var(--border);}
 
 .kpi{border:1px solid var(--border);border-radius:14px;padding:12px;margin-bottom:10px;background:#f8fafc;}
-.kpi .label{font-size:12px;color:var(--muted);}
-.kpi .value{font-weight:900;font-size:18px;}
+.kpi strong{font-size:18px;}
 
-.hero{background:#eef2ff;}
+.results{margin-top:20px;border-top:1px solid var(--border);padding-top:15px;}
 
-.summary{padding:16px;border-top:1px solid var(--border);background:#f1f5f9;font-size:14px;}
-.summary strong{font-size:16px;}
+.small{font-size:12px;color:var(--muted);margin-top:20px;}
 
-.advanced{display:none;}
-
-.note{font-size:12px;color:var(--muted);padding:0 16px 16px;}
-
-@media(max-width:900px){
-  .inputs{grid-template-columns:repeat(2,1fr);}
-  .grid{grid-template-columns:1fr;}
-  .divider{display:none;}
-}
+.slider-container{margin-top:10px;}
+input[type=range]{width:100%;}
 </style>
 </head>
 
 <body>
-<div class="brand-top"></div>
-<div class="brand-header">
+<div class="topbar"></div>
+
+<div class="logo">
 <img src="https://kvcore-library.s3.amazonaws.com/remax1stchoice8207/images/03b9616f75a8e185d56a93c799829fdf.png">
 </div>
 
-<div class="wrap">
+<div class="container">
 <div class="card">
 
-<div class="head">
-<h1>Waiting feels safe — but is it?</h1>
-<div class="subtitle">Simple 12-month comparison. Full PITI vs rent. Appreciation included unless toggled off.</div>
-</div>
-
-<div class="inputs">
-<div class="field"><label>Home Price</label><input id="price" value="450000"></div>
-<div class="field"><label>Down Payment %</label><input id="dp" value="5"></div>
-<div class="field"><label>Interest Rate %</label><input id="rate" value="6.25"></div>
-<div class="field"><label>Loan Term (Years)</label><input id="term" value="30"></div>
-<div class="field"><label>Monthly Rent</label><input id="rent" value="2250"></div>
-<div class="field"><label>Property Tax %</label><input id="tax" value="0.75"></div>
-<div class="field"><label>Insurance (Annual $)</label><input id="ins" value="1500"></div>
-<div class="field"><label>Appreciation %</label><input id="app" value="4"></div>
-</div>
-
-<div class="toggle">
-<label><input type="checkbox" id="advancedToggle"> Show detailed breakdown</label>
+<h1>Buy vs Wait 1 Year</h1>
+<div class="subtitle">
+Real Life Money Spend Buying NOW vs Renting for 1 More Year (plus equity gains if applicable)
 </div>
 
 <div class="grid">
 
-<div class="side">
-<div class="badge buy">MOVE NOW</div>
+<!-- LEFT SIDE BUY -->
+<div>
 
-<div class="kpi"><div class="label">Down Payment Required</div><div class="value" id="dpAmt"></div></div>
-<div class="kpi"><div class="label">Total Monthly Spend</div><div class="value" id="monthly"></div></div>
-<div class="kpi"><div class="label">Total Spent in 12 Months</div><div class="value" id="spent12"></div></div>
-<div class="kpi"><div class="label">Equity Gained in 12 Months</div><div class="value" id="equityGain"></div></div>
-<div class="kpi hero"><div class="label">Effective 12-Month Cost</div><div class="value" id="netCost"></div></div>
+<div class="section-title" style="color:var(--blue)">BUY NOW</div>
 
-<div class="advanced">
-<div class="kpi"><div class="label">Principal Paid (12 mo)</div><div class="value" id="principal"></div></div>
-<div class="kpi"><div class="label">Appreciation (12 mo)</div><div class="value" id="appreciation"></div></div>
-<div class="kpi"><div class="label">Break-Even Month</div><div class="value" id="breakeven"></div></div>
+<div class="field">
+<label>Purchase Price</label>
+<input id="price" value="450000">
 </div>
+
+<div class="field">
+<label>Down Payment %</label>
+<input id="dp" value="5">
+</div>
+
+<div class="field">
+<label>Interest Rate % (30 yr fixed)</label>
+<input id="rate" value="6.25">
+</div>
+
+<div class="field">
+<label>Property Taxes % (annual)</label>
+<input id="tax" value="0.75">
+</div>
+
+<div class="field">
+<label>Homeowners Insurance ($ per month)</label>
+<input id="ins" value="125">
+</div>
+
+<div class="kpi">
+Total Monthly Payment<br>
+<strong id="monthly"></strong>
+</div>
+
 </div>
 
 <div class="divider"></div>
 
-<div class="side">
-<div class="badge wait">WAIT 12 MONTHS</div>
+<!-- RIGHT SIDE RENT -->
+<div>
 
-<div class="kpi"><div class="label">Monthly Rent</div><div class="value" id="rentMonthly"></div></div>
-<div class="kpi"><div class="label">Rent Paid (12 Months)</div><div class="value" id="rent12"></div></div>
-<div class="kpi"><div class="label">Estimated Price in 12 Months</div><div class="value" id="futurePrice"></div></div>
+<div class="section-title" style="color:var(--red)">WAIT 1 YEAR</div>
 
-<div class="advanced">
-<div class="kpi"><div class="label">Extra Down Payment Needed</div><div class="value" id="extraDP"></div></div>
+<div class="field">
+<label>Monthly Rent</label>
+<input id="rent" value="2250">
+</div>
+
+<div class="kpi">
+Total Rent (12 months)<br>
+<strong id="rentTotal"></strong>
+</div>
+
+</div>
+
+</div>
+
+<!-- RESULTS -->
+<div class="results">
+
+<div class="section-title">BUY SIDE RESULTS</div>
+
+<div class="kpi">
+12 Months Payments<br>
+<strong id="yearPayments"></strong>
+</div>
+
+<div class="kpi">
++ Down Payment<br>
+<strong id="downPayment"></strong>
+</div>
+
+<div class="kpi">
+= Total Cash Out<br>
+<strong id="totalCost"></strong>
+</div>
+
+<div class="slider-container">
+<label>Appreciation % (Annual): <strong id="appDisplay">4%</strong></label>
+<input type="range" id="appSlider" min="0" max="10" step="0.5" value="4">
+</div>
+
+<div class="kpi">
+Principal Paid (Year)<br>
+<strong id="principalPaid"></strong>
+</div>
+
+<div class="kpi">
+Appreciation Gain (Year)<br>
+<strong id="appGain"></strong>
+</div>
+
+<div class="kpi">
+Net Cost After Equity Gain<br>
+<strong id="netCost"></strong>
+</div>
+
+</div>
+
+<div class="results">
+
+<div class="section-title">RENT SIDE RESULTS</div>
+
+<div class="kpi">
+Total Cost (12 Months)<br>
+<strong id="rentFinal"></strong>
+</div>
+
+<div class="kpi">
+Equity Gained<br>
+<strong>$0</strong>
+</div>
+
+</div>
+
+<div class="small">
+For informational purposes only. Defaults: $450,000 purchase price, 5% down, 6.25% 30-year fixed, 0.75% property tax, $125/mo insurance, 4% appreciation.
+</div>
+
 </div>
 </div>
 
-</div>
-
-<div class="summary" id="summary"></div>
-
-<div class="note">Simplified illustration. Excludes maintenance, HOA, utilities, and transaction costs.</div>
-
-</div>
-</div>
-
-<div class="brand-bottom"></div>
+<div class="bottombar"></div>
 
 <script>
 function fmt(n){return n.toLocaleString(undefined,{style:"currency",currency:"USD",maximumFractionDigits:0});}
 
 function calc(){
-let price=+price.value;
+
+let price=+priceInput.value;
 let dpPct=+dp.value/100;
 let rate=+rateInput.value/100/12;
-let termMonths=+term.value*12;
-let rentVal=+rent.value;
 let taxPct=+tax.value/100;
 let insVal=+ins.value;
-let appPct=+app.value/100;
+let rentVal=+rent.value;
+let appPct=+appSlider.value/100;
 
-let dpAmount=price*dpPct;
-let loan=price-dpAmount;
+let dpAmt=price*dpPct;
+let loan=price-dpAmt;
 
+let termMonths=360;
 let mortgage=loan*(rate*Math.pow(1+rate,termMonths))/(Math.pow(1+rate,termMonths)-1);
+
 let monthlyTax=(price*taxPct)/12;
-let monthlyIns=insVal/12;
-let monthlyTotal=mortgage+monthlyTax+monthlyIns;
+let monthlyTotal=mortgage+monthlyTax+insVal;
 
 let balance=loan;
-let value=price;
-let principalPaid=0;
+let principalYear=0;
 
 for(let i=1;i<=12;i++){
 let interest=balance*rate;
-let principal= mortgage-interest;
+let principal=mortgage-interest;
 balance-=principal;
-principalPaid+=principal;
-value*=1+(appPct/12);
+principalYear+=principal;
 }
 
-let appreciationGain=value-price;
-let equityGain=principalPaid+appreciationGain;
-let spent12=dpAmount+monthlyTotal*12;
-let netCostVal=spent12-equityGain;
+let yearPayments=monthlyTotal*12;
+let totalCost=yearPayments+dpAmt;
+let appreciationGain=price*appPct;
+let netCostVal=totalCost-(principalYear+appreciationGain);
 
-let rent12Val=rentVal*12;
-let futurePriceVal=price*(1+appPct);
-let extraDPVal=(futurePriceVal*dpPct)-dpAmount;
-
-dpAmt.textContent=fmt(dpAmount);
 monthly.textContent=fmt(monthlyTotal);
-spent12.textContent=fmt(spent12);
-equityGain.textContent=fmt(equityGain);
+yearPayments.textContent=fmt(yearPayments);
+downPayment.textContent=fmt(dpAmt);
+totalCost.textContent=fmt(totalCost);
+principalPaid.textContent=fmt(principalYear);
+appGain.textContent=fmt(appreciationGain);
 netCost.textContent=fmt(netCostVal);
 
-principal.textContent=fmt(principalPaid);
-appreciation.textContent=fmt(appreciationGain);
+rentTotal.textContent=fmt(rentVal*12);
+rentFinal.textContent=fmt(rentVal*12);
 
-rentMonthly.textContent=fmt(rentVal);
-rent12.textContent=fmt(rent12Val);
-futurePrice.textContent=fmt(futurePriceVal);
-extraDP.textContent=fmt(extraDPVal);
-
-summary.innerHTML= netCostVal<rent12Val ?
-"<strong>Under these assumptions, buying builds more value than renting over the next 12 months.</strong>" :
-"<strong>Renting costs less cash over 12 months, but delays equity growth.</strong>";
+appDisplay.textContent=appSlider.value+"%";
 }
 
-const price=document.getElementById("price");
+const priceInput=document.getElementById("price");
 const dp=document.getElementById("dp");
 const rateInput=document.getElementById("rate");
-const term=document.getElementById("term");
-const rent=document.getElementById("rent");
 const tax=document.getElementById("tax");
 const ins=document.getElementById("ins");
-const app=document.getElementById("app");
+const rent=document.getElementById("rent");
+const appSlider=document.getElementById("appSlider");
 
-[price,dp,rateInput,term,rent,tax,ins,app].forEach(i=>i.addEventListener("input",calc));
-
-document.getElementById("advancedToggle").addEventListener("change",function(){
-document.querySelectorAll(".advanced").forEach(el=>el.style.display=this.checked?"block":"none");
-});
+[priceInput,dp,rateInput,tax,ins,rent,appSlider].forEach(el=>el.addEventListener("input",calc));
 
 calc();
 </script>
+
 </body>
 </html>
